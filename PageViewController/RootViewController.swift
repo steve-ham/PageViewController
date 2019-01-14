@@ -8,14 +8,14 @@
 
 import UIKit
 
-class RootViewController: UIViewController, PageViewControllerDelegate {
+final class RootViewController: UIViewController, PageViewControllerDelegate {
     
     static let identifier = "\(RootViewController.self)"
     
     @IBOutlet weak var firstLineView: UIView!
     @IBOutlet weak var secondLineView: UIView!
     
-    enum SelectedTab {
+    private enum SelectedTab {
         case first
         case second
     }
@@ -30,14 +30,12 @@ class RootViewController: UIViewController, PageViewControllerDelegate {
     
     @IBAction private func clickFirstButton(_ firstButton: UIButton) {
         updateTabUI(selectedTab: .first)
-        
         let pageViewController = children.first! as! PageViewController
         pageViewController.turnPageBackward()
     }
     
     @IBAction private func clickSecondButton(_ secondButton: UIButton) {
         updateTabUI(selectedTab: .second)
-        
         let pageViewController = children.first! as! PageViewController
         pageViewController.turnPageForward()
     }

@@ -12,14 +12,14 @@ protocol PageViewControllerDelegate: NSObjectProtocol {
     func pageViewController(_ pageViewController: PageViewController, didTurnToPageNumber pageNumber: Int)
 }
 
-class PageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+final class PageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     weak var pvcDelegate: PageViewControllerDelegate?
     
     private var pageNumber = 0
     private var pageNumberBeforeTransition = 0
     
-    lazy var subViewControllers: [UIViewController] = {
+    private lazy var subViewControllers: [UIViewController] = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let firstViewController = storyboard.instantiateViewController(withIdentifier: "FirstViewController")
         let secondViewController = storyboard.instantiateViewController(withIdentifier: "SecondViewController")
@@ -69,6 +69,8 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
         let afterIndex = index + 1
         return subViewControllers[afterIndex]
     }
+    
+    // MARK: - UIPageViewControllerDelegate
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         pageNumberBeforeTransition = pageNumber
