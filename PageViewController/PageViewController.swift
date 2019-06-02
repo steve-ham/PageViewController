@@ -79,6 +79,11 @@ final class PageViewController: UIPageViewController, UIPageViewControllerDataSo
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if completed {
+            if let previousViewController = previousViewControllers.first, previousViewController is SecondViewController {
+                pageNumber = 0
+            } else {
+                pageNumber = 1
+            }
             pvcDelegate?.pageViewController(self, didTurnToPageNumber: pageNumber)
         } else {
             pageNumber = pageNumberBeforeTransition
