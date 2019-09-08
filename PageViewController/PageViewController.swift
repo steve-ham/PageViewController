@@ -17,76 +17,45 @@ final class PageViewController: UIPageViewController, UIPageViewControllerDataSo
     weak var pvcDelegate: PageViewControllerDelegate?
     
     private var pageNumber = 0
-    private var pageNumberBeforeTransition = 0
     
     private lazy var subViewControllers: [UIViewController] = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let firstViewController = storyboard.instantiateViewController(withIdentifier: "FirstViewController")
         let secondViewController = storyboard.instantiateViewController(withIdentifier: "SecondViewController")
-        return [firstViewController, secondViewController]
+        let thirdViewController = storyboard.instantiateViewController(withIdentifier: "ThirdViewController")
+        return [firstViewController, secondViewController, thirdViewController]
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = self
         delegate = self
-        setViewControllers([subViewControllers.first!], direction: .forward, animated: true, completion: nil)
+        setViewControllers([subViewControllers[1]], direction: .forward, animated: true, completion: nil)
     }
     
-    func turnPageBackward() {
-        setViewControllers([subViewControllers.first!], direction: .reverse, animated: true, completion: nil)
-    }
-    
-    func turnPageForward() {
-        setViewControllers([subViewControllers.last!], direction: .forward, animated: true, completion: nil)
+    func turnPage(to pageNumber: Int, direction: UIPageViewController.NavigationDirection) {
+        self.pageNumber = pageNumber
+        setViewControllers([subViewControllers[pageNumber]], direction: direction, animated: true, completion: nil)
     }
     
     // MARK: - UIPageViewControllerDataSource
     
-    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return subViewControllers.count
-    }
-    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        
-        let index = subViewControllers.index(of: viewController) ?? 0
-        
-        guard index > 0 else {
-            return nil
-        }
-        
-        let beforeIndex = index - 1
-        return subViewControllers[beforeIndex]
+        return pageNumber - 1 >= 0 ? subViewControllers[pageNumber - 1] : nil
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        let index = subViewControllers.index(of: viewController) ?? 0
-        
-        guard index < subViewControllers.count - 1 else {
-            return nil
-        }
-        
-        let afterIndex = index + 1
-        return subViewControllers[afterIndex]
+        return pageNumber + 1 <= 2 ? subViewControllers[pageNumber + 1] : nil
     }
     
     // MARK: - UIPageViewControllerDelegate
     
-    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        pageNumberBeforeTransition = pageNumber
-        pageNumber = subViewControllers.index(of: pendingViewControllers.first!) ?? 0
-    }
-    
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        if completed {
-            if let previousViewController = previousViewControllers.first, previousViewController is SecondViewController {
-                pageNumber = 0
-            } else {
-                pageNumber = 1
-            }
+        
+        if completed, let currentViewController = viewControllers?.first,
+            let index = subViewControllers.firstIndex(of: currentViewController) {
+            pageNumber = index
             pvcDelegate?.pageViewController(self, didTurnToPageNumber: pageNumber)
-        } else {
-            pageNumber = pageNumberBeforeTransition
         }
     }
 }

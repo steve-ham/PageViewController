@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Oml-RR-EfP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Oml-RR-EfP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,17 +32,24 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kh0-eW-gfi">
-                                                <rect key="frame" x="0.0" y="0.0" width="183.5" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="119.5" height="50"/>
                                                 <state key="normal" title="First"/>
                                                 <connections>
                                                     <action selector="clickFirstButton:" destination="Oml-RR-EfP" eventType="touchUpInside" id="qxy-Wn-u5V"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qXA-mL-3Ae">
-                                                <rect key="frame" x="191.5" y="0.0" width="183.5" height="50"/>
+                                                <rect key="frame" x="127.5" y="0.0" width="120" height="50"/>
                                                 <state key="normal" title="Second"/>
                                                 <connections>
                                                     <action selector="clickSecondButton:" destination="Oml-RR-EfP" eventType="touchUpInside" id="jU4-O7-TXa"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SfA-Pk-A9v" userLabel="Third">
+                                                <rect key="frame" x="255.5" y="0.0" width="119.5" height="50"/>
+                                                <state key="normal" title="Third"/>
+                                                <connections>
+                                                    <action selector="clickThirdButton:" destination="Oml-RR-EfP" eventType="touchUpInside" id="z1n-ud-8cm"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -51,11 +58,15 @@
                                         <rect key="frame" x="0.0" y="45" width="375" height="5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FV2-6p-KfE">
-                                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="125" height="5"/>
                                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lSz-jb-zQ4">
-                                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="5"/>
+                                                <rect key="frame" x="125" y="0.0" width="125" height="5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wX8-3p-fMo" userLabel="Third Line View">
+                                                <rect key="frame" x="250" y="0.0" width="125" height="5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
@@ -99,8 +110,10 @@
                         <viewLayoutGuide key="safeArea" id="byF-2b-1dI"/>
                     </view>
                     <connections>
+                        <outlet property="buttonsStackView" destination="nzk-td-h9z" id="CHV-5U-tNW"/>
                         <outlet property="firstLineView" destination="FV2-6p-KfE" id="25C-wU-gsk"/>
                         <outlet property="secondLineView" destination="lSz-jb-zQ4" id="apL-sk-9g2"/>
+                        <outlet property="thirdLineView" destination="wX8-3p-fMo" id="jpq-li-GfX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TKw-UF-oy9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -110,12 +123,7 @@
         <!--Page View Controller-->
         <scene sceneID="eXm-PI-oeQ">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="aIc-cR-I0I" customClass="PageViewController" customModule="PageViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <connections>
-                        <segue destination="P7z-Ni-54A" kind="show" id="UaZ-Em-cWp"/>
-                        <segue destination="jMl-4Y-Zf3" kind="show" id="NFx-WC-m9z"/>
-                    </connections>
-                </pageViewController>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="aIc-cR-I0I" customClass="PageViewController" customModule="PageViewController" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NyJ-mU-7F7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5073" y="1555"/>
@@ -125,11 +133,11 @@
             <objects>
                 <viewController storyboardIdentifier="FirstViewController" id="P7z-Ni-54A" customClass="FirstViewController" customModule="PageViewController" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rXF-Sc-xxD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="595"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FirstViewController" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aTK-hI-Zyp">
-                                <rect key="frame" x="114.5" y="287" width="146" height="21"/>
+                                <rect key="frame" x="114.5" y="323" width="146" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -151,11 +159,11 @@
             <objects>
                 <viewController storyboardIdentifier="SecondViewController" id="jMl-4Y-Zf3" customClass="SecondViewController" customModule="PageViewController" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ia7-NV-vEB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="595"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SecondViewController" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfq-Av-gaU">
-                                <rect key="frame" x="102" y="287" width="171" height="21"/>
+                                <rect key="frame" x="102" y="323" width="171" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -171,6 +179,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o2q-jG-JMv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5881" y="1899"/>
+        </scene>
+        <!--Third View Controller-->
+        <scene sceneID="f6w-6Y-Fgs">
+            <objects>
+                <viewController storyboardIdentifier="ThirdViewController" id="OUG-y3-iQc" customClass="ThirdViewController" customModule="PageViewController" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dXz-kt-eiO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ThirdViewController" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1XY-8a-puB">
+                                <rect key="frame" x="111.5" y="323" width="152.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="1XY-8a-puB" firstAttribute="centerX" secondItem="dXz-kt-eiO" secondAttribute="centerX" id="2sO-dE-z7X"/>
+                            <constraint firstItem="1XY-8a-puB" firstAttribute="centerY" secondItem="dXz-kt-eiO" secondAttribute="centerY" id="Ll3-Ou-qdm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3YM-bH-Sid"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uvn-Cc-QXp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5881" y="2566"/>
         </scene>
     </scenes>
 </document>
